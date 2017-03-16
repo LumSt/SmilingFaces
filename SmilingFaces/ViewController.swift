@@ -61,35 +61,36 @@ class ViewController: UIViewController {
     }
     
     @IBAction func movemoji(_ sender: UIPanGestureRecognizer) {
-        let translation = sender.translation(in: view)
         
-        let uimgview = sender.view as! UIImageView
-        
-        
-        
-        
+            let translation = sender.translation(in: view)
+            
+            let uimgview = sender.view as! UIImageView
+
 //        let faceCenter = CGPoint(x:self.newlyCreatedFace.center.x, y:self.newlyCreatedFace.center.y)
-        
+            
 //        self.newlyCreatedFace.center = CGPoint(x: faceCenter.x, y: faceCenter.y + trayView.frame.origin.y)
-        if (sender.state == UIGestureRecognizerState.began) {
-            NSLog("Gesture began at: %@", NSStringFromCGPoint(translation));
-            self.newlyCreatedFace = UIImageView.init(image: uimgview.image)
-            self.view.addSubview(newlyCreatedFace)
-            self.newlyCreatedFace.center = uimgview.center
-            
-        } else if (sender.state == UIGestureRecognizerState.changed) {
-            NSLog("Gesture changed at: %@", NSStringFromCGPoint(translation));
-            self.newlyCreatedFace.center = CGPoint(x:newlyCreatedFace.center.x + translation.x, y: newlyCreatedFace.center.y + translation.y)
-            
-        } else if (sender.state == UIGestureRecognizerState.ended) {
-            NSLog("Gesture ended at: %@", NSStringFromCGPoint(translation));
-            
-            
+            if (sender.state == UIGestureRecognizerState.began) {
+                NSLog("Begin");
+                self.newlyCreatedFace = UIImageView.init(image: uimgview.image)
+                self.view.addSubview(self.newlyCreatedFace)
+                
+                self.newlyCreatedFace.center = uimgview.center
+                newlyCreatedFace.center.y += trayView.frame.origin.y
+                newLyCreatedCenter = newlyCreatedFace.center
+            } else if (sender.state == UIGestureRecognizerState.changed) {
+                NSLog("Changed");
+                self.newlyCreatedFace.center = CGPoint(x:newLyCreatedCenter.x + translation.x, y: newLyCreatedCenter.y + translation.y)
+                
+            } else if (sender.state == UIGestureRecognizerState.ended) {
+                NSLog("Ended");
+                
+                
+            }
         }
         
         
     }
     
 
-}
+
 
