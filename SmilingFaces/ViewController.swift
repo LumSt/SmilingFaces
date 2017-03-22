@@ -130,8 +130,8 @@ class ViewController: UIViewController {
     func didFaceScale(sender: UIPinchGestureRecognizer) {
         let scale = sender.scale
         //        var velocity = sender.velocity
-        
-        self.newlyCreatedFace.transform = CGAffineTransform(scaleX: scale, y: scale)
+        newlyCreatedFace = sender.view as! UIImageView
+        newlyCreatedFace.transform = CGAffineTransform(scaleX: scale, y: scale)
         
         //        if sender.state == .began {
         //            UIView.animate(withDuration: 0.2, animations: {
@@ -149,10 +149,12 @@ class ViewController: UIViewController {
         let rotation = sender.rotation
         //        var velocity = sender.velocity
         print("Going to rotate")
-        self.newlyCreatedFace.transform = CGAffineTransform(rotationAngle: 180.0 * rotation / 180.0)
+        newlyCreatedFace = sender.view as! UIImageView
+        newlyCreatedFace.transform = CGAffineTransform(rotationAngle: 180.0 * rotation / 180.0)
     }
     
     func deleteFace(sender: UITapGestureRecognizer) {
+        newlyCreatedFace = sender.view as! UIImageView
         newlyCreatedFace.removeFromSuperview()
     }
     
